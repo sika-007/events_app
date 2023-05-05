@@ -5,7 +5,7 @@ import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ title }) {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -24,24 +24,14 @@ export default function Home({ title }) {
         </nav>
       </header>
 
-      <h1>{title}</h1>
-      
       <main className={`${styles.main} ${inter.className}`}>
-        <a href=''>
-          <img src=''/>
-          <h2>Events in London</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque veniam iusto quae dignissimos recusandae quibusdam rem quas tempore nostrum vero dolorum aspernatur doloribus commodi, odit pariatur delectus aperiam voluptatibus architecto nam placeat dolorem deserunt sit nisi natus? Optio, accusantium enim odit voluptatum repudiandae voluptatibus, repellendus iusto ipsa quaerat sit iure?</p>
-        </a>
-        <a href=''>
-          <img src=''/>
-          <h2>Events in San Francisco</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque veniam iusto quae dignissimos recusandae quibusdam rem quas tempore nostrum vero dolorum aspernatur doloribus commodi, odit pariatur delectus aperiam voluptatibus architecto nam placeat dolorem deserunt sit nisi natus? Optio, accusantium enim odit voluptatum repudiandae voluptatibus, repellendus iusto ipsa quaerat sit iure?</p>
-        </a>
-        <a href=''>
-          <img src=''/>
-          <h2>Events in Barcelona</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque veniam iusto quae dignissimos recusandae quibusdam rem quas tempore nostrum vero dolorum aspernatur doloribus commodi, odit pariatur delectus aperiam voluptatibus architecto nam placeat dolorem deserunt sit nisi natus? Optio, accusantium enim odit voluptatum repudiandae voluptatibus, repellendus iusto ipsa quaerat sit iure?</p>
-        </a>
+        {data.map(event => (
+          <a key={event.id} href={`/events/${event.id}`}>
+            <Image width={50} height={50} src={event.image} alt={event.id} />
+            <h2>{event.title}</h2>
+            <p>{event.description}</p>
+          </a>
+        ))}
       </main>
 
       <footer>
@@ -52,10 +42,14 @@ export default function Home({ title }) {
 }
 
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
+
+  const { events_categories } = await import("/data/data.json")
+
+  console.log(events_categories)
   return {
       props: {
-          title: "Hello Everyone!"
+          data: events_categories
       }
   }
 }
