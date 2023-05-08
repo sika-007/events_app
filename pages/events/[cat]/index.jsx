@@ -1,4 +1,6 @@
 import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export async function getStaticPaths() {
 
@@ -23,7 +25,7 @@ export async function getStaticProps(context) {
   const { all_events } = await import("/data/data.json")
   const id = context?.params?.cat
   const data = all_events.filter(event => event.city === id)
-  console.log(data)
+  console.log(id)
 
   return {
     props: { data }
@@ -32,31 +34,18 @@ export async function getStaticProps(context) {
 
 const EventsPerCity = ({ data }) => {
 
-  console.log(data)
-
   return (
     <div>
-      <h1>Events in London</h1>
-      <a href="/events/london/event1">
-        <img src="" alt="" />
-        <h2>Event 1</h2>
-      </a>
-      <a href="/events/london/event2">
-        <img src="" alt="" />
-        <h2>Event 2</h2>
-      </a>
-      <a href="/events/london/event5">
-        <img src="" alt="" />
-        <h2>Event 3</h2>
-      </a>
-      <a href="/events/london/event3">
-        <img src="" alt="" />
-        <h2>Event 4</h2>
-      </a>
-      <a href="/events/london/event4">
-        <img src="" alt="" />
-        <h2>Event 5</h2>
-      </a>
+      <h1>Events in {data[0].city}</h1>
+      <div>
+        {data.map((event) => (
+          <Link key={event.id} href={`/events/${event.city}/${event.id}`}>
+            <Image src={event.image} alt={event.title} width={300} height={200} /> 
+            <h2>{event.title}</h2>
+            <p>{event.description}</p>
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }
