@@ -1,0 +1,120 @@
+.header
+  background: linear-gradient(305deg, #dbfff3, transparent)
+  min-height: auto
+
+  >div
+    width: 100%
+    max-width: 1450px
+    margin: auto
+    padding: 80px 30px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+  .header-title
+    width: 60%
+    font-size: 40px
+    text-transform: uppercase
+
+  .top-nav
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    ul
+      display: flex
+      list-style: none
+      text-decoration: none
+      gap: 10px
+
+      li
+        font-weight: 600
+        font-size: 1.1rem
+
+.main
+  width: 100%
+  max-width: 1450px
+  margin: auto
+  padding: 80px 30px
+  min-height: 500px
+
+  .home-card
+    display: flex
+    flex-direction: column
+    gap: 50px
+
+    .card
+      display: flex
+      flex-direction: row
+      gap: 30px
+      justify-content: center
+      align-items: center
+
+      &:nth-child(even)
+        flex-direction: row-reverse
+
+      .home-images
+        width: 40%
+        display: flex
+        justify-content: center
+
+        img
+          width: 100%
+          max-width: 600px
+          object-fit: cover
+
+      .content
+        width: 50%
+
+  .aboutus-list 
+    display: flex
+    list-style: none
+
+  .events-page
+    display: flex
+    gap: 20px
+    text-align: center
+
+    .card
+      position: relative
+
+      .h2-text
+        position: absolute
+        inset: 0
+        display: flex
+        align-items: center
+        font-size: 30px
+        color: white
+        text-transform: uppercase
+        text-shadow: 1px 1px 20px black
+
+        h2
+          text-align: center
+          font-size: 2rem
+
+.footer
+  background: #333
+  color: white
+  padding: 10px
+  text-align: center
+
+
+.cat_events
+
+  .content
+    display: flex
+    flex-wrap: wrap
+    gap: 30px
+    width: calc( 100% - (30px * 3) )
+    margin-right: 0
+    width: 100%
+
+    .card
+      display: flex
+      flex-direction: column
+      width: 300px
+
+.event_info
+  .image
+    object-fit: contain
+    height: 500px

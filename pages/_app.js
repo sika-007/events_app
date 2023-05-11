@@ -1,5 +1,5 @@
-import "@/styles/home.module.css"
-import '@/styles/globals.css'
+import '@/styles/globals.sass'
+import "@/styles/general.sass"
 import MainLayout from '@/src/components/layout/MainLayout'
 
 export default function App({ Component, pageProps }) {
