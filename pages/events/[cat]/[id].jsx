@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+import EventInfo from '@/src/components/events/EventInfo'
 /* Pay attention to the way this page is named. It is so to specify that this is a dynamic page that can hold dynamic content */
 
 export async function getStaticPaths() {
@@ -33,19 +33,6 @@ export async function getStaticProps(context) {
   }
 }
 
-const EventPage = ({ pageItem }) => {
-
-
-  console.log(pageItem)
-
-  return (
-    <div className='event_info'>
-      <Image className='image' src={pageItem.image} width={1000} height={300} alt={pageItem.title} />
-      <h1>{pageItem.title}</h1>
-      <p>{pageItem.description}</p>
-      <input type="email" /> <button>Submit</button>
-    </div>
-  )
-}
+const EventPage = ({ pageItem }) => <EventInfo pageItem={pageItem} />
 
 export default EventPage
