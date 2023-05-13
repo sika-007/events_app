@@ -1,10 +1,39 @@
+import { headers } from 'next/dist/client/components/headers'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
 
 
 const EventInfo = ({ pageItem }) => {
+  const inputEmail = useRef()
+  const router = useRouter()
 
-  function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const email = inputEmail.current.value;
+    const eventId = router?.query.id
 
+    try {
+      // POST fetch request
+      // post the email and the event id
+      const response = await fetch(`/api/email-registration`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          eventId
+        })
+      });
+      const data = await response.json()
+      console.log("POST", data)
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`)
+      }
+    } catch(err) {
+      console.error(err)
+    }
   }
 
   return (
@@ -15,7 +44,7 @@ const EventInfo = ({ pageItem }) => {
       <form className='email-registration' onSubmit={handleSubmit}>
         <label className='input-and-btn'>
           Get registered for this event
-          <input id="email" type="email" placeholder='Please insert your email' /> <button type="button">Submit</button>
+          <input ref={inputEmail} id="email" type="email" placeholder='Please insert your email' /> <button type="submit">Submit</button>
         </label>
       </form>
     </div>
