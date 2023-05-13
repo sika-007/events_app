@@ -4,7 +4,7 @@ import EventInfo from '@/src/components/events/EventInfo'
 
 export async function getStaticPaths() {
 
-  const { all_events } = await import("/data/data.json")
+  const { all_events } = await import("/tmp/data.json")
 
   const slugs = all_events.map(event => (
     {
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 
-  const { all_events } = await import("/data/data.json")
+  const { all_events } = await import("/tmp/data.json")
   const page = all_events.filter(item => item.id === context?.params?.id)
   console.log(page)
   const [pageItem] = page

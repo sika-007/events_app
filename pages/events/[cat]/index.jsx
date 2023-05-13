@@ -2,7 +2,7 @@ import EventCategory from '@/src/components/events/EventCategory'
 
 export async function getStaticPaths() {
 
-  const { events_categories } = await import("/data/data.json")
+  const { events_categories } = await import("/tmp/data.json")
 
   const allPaths = events_categories.map(event => {
     return {
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 
-  const { all_events } = await import("/data/data.json")
+  const { all_events } = await import("/tmp/data.json")
   const id = context?.params?.cat
   const data = all_events.filter(event => event.city === id)
   console.log(id)

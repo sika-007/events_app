@@ -42,6 +42,9 @@ const EventInfo = ({ pageItem }) => {
       }
     }
     
+    setTimeout(() => {
+      setMessage("")
+    }, 5000)
   }
 
 
