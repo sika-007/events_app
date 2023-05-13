@@ -26,6 +26,7 @@ export default function handler(req, res) {
 	const filePath = buildPath();
 	const { events_categories, all_events } = extractData(filePath);
 	console.log()
+	
 
 	if (!all_events || !events_categories) {
 		res.status(404).json({
@@ -45,16 +46,16 @@ export default function handler(req, res) {
 					return {
 						...event, emails_registered: [...event.emails_registered, email]
 					}
-				} else {
-					res.status(406).json({ status: 406, message: "This is not a valid email" })
+				} else if (!email || !email.includes('@')) {
+					res.status(422).json({ status: 422, message: "This is not a valid email" })
 				}
-			} 
-			
+			}
+
 			return event
 		})
 
 		fs.writeFileSync(filePath, JSON.stringify({ events_categories, all_events: newAllEvents }))
 
-		res.status(200).json({ message: `the email ${email} has been registered for ${eventId} succsessfully` })
+		res.status(200).json({ message: `the email ${email} has been registered for this event successfully` })
 	}
 }
